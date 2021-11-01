@@ -8,7 +8,7 @@ import { generateLastNdates } from '../utils/formatTime';
 const ONE_DAY_TIMESTAMP = 60 * 60 * 24 * 1000;
 const CHUNK_NUMBER = 8;
 
-const generateNChunksRequest = (sliceNumbers, date) => {
+const generateNChunksRequest = (date) => {
   if (isEmpty(date)) return [];
 
   const timestamp = Date.now();
@@ -17,8 +17,8 @@ const generateNChunksRequest = (sliceNumbers, date) => {
   const dateRequested = new Date(date).getTime();
   const requests = [];
 
-  for (let i = 1; i <= sliceNumbers; i += 1) {
-    const chunkTime = Math.round(ONE_DAY_TIMESTAMP / sliceNumbers);
+  for (let i = 1; i <= CHUNK_NUMBER; i += 1) {
+    const chunkTime = Math.round(ONE_DAY_TIMESTAMP / CHUNK_NUMBER);
 
     const startTime = dateRequested + (i - 1) * chunkTime;
     const endTime = startTime + chunkTime;
@@ -54,7 +54,7 @@ export const getUserTradesByDate = async (date) => {
   if (isEmpty(date)) return [];
 
   const response = await axios
-    .all(generateNChunksRequest(CHUNK_NUMBER, date))
+    .all(generateNChunksRequest(date))
     .then(axios.spread((...responses) => flatten(responses.map((res) => res.data))))
     .catch((errors) => {
       console.error('Something went wrong when fetching getUserTradesByDate, error: ', errors);
