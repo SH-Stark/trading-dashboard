@@ -77,7 +77,7 @@ const Content = memo(({ trades }) => {
     <Timeline>
       {orderedTrades.slice(0, maxLength).map((trade, index) => (
         <Trade
-          key={trade.orderId}
+          key={trade.id}
           trade={trade}
           isLast={index === tradesLength - 1 || index === maxLength - 1}
         />

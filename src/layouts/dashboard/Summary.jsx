@@ -17,8 +17,8 @@ const Summary = () => {
   const incomeToday = incomes[today];
   const tradesToday = trades[today];
 
-  const profitToday = sum(incomeToday?.map((inc) => JSON.parse(inc.income)));
-  const weekProfit = sum(flatten(Object.values(incomes)).map((inc) => JSON.parse(inc.income)));
+  const profitToday = sum(incomeToday?.map((inc) => JSON.parse(inc?.income)));
+  const weekProfit = sum(flatten(Object.values(incomes)).map((inc) => JSON.parse(inc?.income)));
 
   const tradesNumber = {};
 
