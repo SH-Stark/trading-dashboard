@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import SummaryBox from '../../components/_dashboard/SummaryBox';
 import { fCurrency, fNumber } from '../../utils/formatNumber';
 import { tradesAtom, incomesAtom, accountAtom } from '../../recoil/atoms';
+import { getPercentIncrease } from '../../utils/functions';
 
 const Summary = () => {
   const trades = useRecoilValue(tradesAtom);
@@ -35,7 +36,7 @@ const Summary = () => {
       <Grid item xs={6} sm={4} md={2}>
         <SummaryBox
           text="Profit Today"
-          total={fCurrency(profitToday)}
+          total={getPercentIncrease(profitToday, JSON.parse(account?.totalWalletBalance))}
           color="primary"
           backgroundColor="success"
         />
@@ -44,7 +45,7 @@ const Summary = () => {
       <Grid item xs={6} sm={4} md={2}>
         <SummaryBox
           text="Profit last 7 days"
-          total={fCurrency(weekProfit)}
+          total={getPercentIncrease(weekProfit, JSON.parse(account?.totalWalletBalance))}
           color="info"
           backgroundColor="info"
         />

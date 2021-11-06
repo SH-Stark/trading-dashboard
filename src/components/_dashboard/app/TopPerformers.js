@@ -18,7 +18,7 @@ const TopPerformers = () => {
   const pnlRepartition = {};
 
   flatten(Object.values(incomes))?.forEach((inc) => {
-    pnlRepartition[inc.symbol] = (pnlRepartition[inc.symbol] || 0) + JSON.parse(inc.income);
+    pnlRepartition[inc?.symbol] = (pnlRepartition[inc?.symbol] || 0) + JSON.parse(inc?.income);
   });
 
   const orderedPerformers = orderBy(
