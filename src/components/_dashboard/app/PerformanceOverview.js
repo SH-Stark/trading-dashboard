@@ -52,7 +52,8 @@ const PerformanceOverview = () => {
 
   const { totalCrossWalletBalance = 0 } = account;
   const balance = JSON.parse(totalCrossWalletBalance);
-  const increasePercent = (balance > 0 && profitLastWeek && (profitLastWeek / balance) * 100) || 0;
+  const increasePercent =
+    (balance > 0 && profitLastWeek && (profitLastWeek / (balance - profitLastWeek)) * 100) || 0;
 
   const balancesOfLastWeek = getBalanceLastWeek(incomes, balance);
   const weekIncome = getIncomeOfWeek(incomes, true);
@@ -111,7 +112,7 @@ const PerformanceOverview = () => {
     <Card>
       <CardHeader
         title="Performance Overview"
-        subheader={`${fPercent(increasePercent)} last 7 days`}
+        subheader={`${fPercent(increasePercent, '0.00%')} last 7 days`}
       />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart type="line" series={CHART_DATA} options={chartOptions} height={364} />

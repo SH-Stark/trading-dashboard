@@ -7,8 +7,8 @@ export function fCurrency(number) {
   return numeral(number).format(Number.isInteger(number) ? '$0,0' : '$0,0.00');
 }
 
-export function fPercent(number) {
-  const res = numeral(number / 100).format('0.0%');
+export function fPercent(number, f = '0.0%') {
+  const res = numeral(number / 100).format(f);
   const indicator = number > 0 ? '+' : '';
 
   return indicator + res;
