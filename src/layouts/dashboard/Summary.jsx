@@ -36,7 +36,8 @@ const Summary = () => {
       <Grid item xs={6} sm={4} md={2}>
         <SummaryBox
           text="Profit Today"
-          total={getPercentIncrease(profitToday, JSON.parse(account?.totalWalletBalance))}
+          total={getPercentIncrease(profitToday, account?.totalWalletBalance)}
+          subText={fCurrency(profitToday)}
           color="primary"
           backgroundColor="success"
         />
@@ -45,8 +46,9 @@ const Summary = () => {
       <Grid item xs={6} sm={4} md={2}>
         <SummaryBox
           text="Profit last 7 days"
-          total={getPercentIncrease(weekProfit, JSON.parse(account?.totalWalletBalance))}
+          total={getPercentIncrease(weekProfit, account?.totalWalletBalance)}
           color="info"
+          subText={fCurrency(weekProfit)}
           backgroundColor="info"
         />
       </Grid>
