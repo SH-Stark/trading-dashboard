@@ -1,6 +1,6 @@
 // material
 import { styled } from '@mui/material/styles';
-import { Card, Grid, Stack, Typography, Box } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 
 const SummaryBox = ({ total = 0, color = '', backgroundColor = '', text = '', subText = '' }) => {
   const RootStyle = styled(Card)(({ theme }) => ({
