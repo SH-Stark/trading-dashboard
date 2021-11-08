@@ -12,16 +12,6 @@ const sidebarConfig = [
     path: '/dashboard/app',
     icon: getIcon(pieChart2Fill)
   },
-  // {
-  //   title: 'Order history',
-  //   path: '/dashboard/user',
-  //   icon: getIcon(peopleFill)
-  // },
-  // {
-  //   title: 'product',
-  //   path: '/dashboard/products',
-  //   icon: getIcon(shoppingBagFill)
-  // },
   {
     title: 'Order history',
     path: '/dashboard/orderHistory',

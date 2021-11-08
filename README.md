@@ -2,7 +2,6 @@
 
 <img width="1903" alt="Screenshot 2021-11-01 at 18 28 41" src="https://user-images.githubusercontent.com/26247922/139714053-10b3f67e-ffcb-443e-aca4-41044c1d8537.png">
 
-
 ## Getting started
 
 - Clone this repository.
