@@ -5,14 +5,14 @@ import { Box, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/materi
 
 // ----------------------------------------------------------------------
 
-UserListHead.propTypes = {
+OrderListHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']),
   orderBy: PropTypes.string,
   headLabel: PropTypes.array,
   onRequestSort: PropTypes.func
 };
 
-export default function UserListHead({ order, orderBy, headLabel, onRequestSort }) {
+export default function OrderListHead({ order, orderBy, headLabel, onRequestSort }) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };

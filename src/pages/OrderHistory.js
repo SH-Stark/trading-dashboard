@@ -23,7 +23,7 @@ import Page from '../components/Page';
 import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar } from '../components/_dashboard/user';
+import { OrderListHead, OrderListToolbar } from '../components/_dashboard/order';
 //
 
 import { fDateTime } from '../utils/formatTime';
@@ -37,6 +37,7 @@ const TABLE_HEAD = [
   { id: 'side', label: 'Side' },
   { id: 'time', label: 'Time' },
   { id: 'pnl', label: 'Realized PnL' },
+  { id: 'price', label: 'Price' },
   { id: 'quoteQty', label: 'Quote quantity' }
 ];
 
@@ -66,7 +67,10 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.symbol.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(
+      array,
+      (_order) => _order.symbol.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -113,9 +117,13 @@ const OrderHistory = () => {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orderedTrades.length) : 0;
 
-  const filteredUsers = applySortFilter(orderedTrades, getComparator(order, orderedBy), filterName);
+  const filteredOrders = applySortFilter(
+    orderedTrades,
+    getComparator(order, orderedBy),
+    filterName
+  );
 
-  const isUserNotFound = filteredUsers.length === 0;
+  const isOrderNotFound = filteredOrders.length === 0;
 
   return (
     <Page title="Order History | Futures">
@@ -127,7 +135,7 @@ const OrderHistory = () => {
         </Stack>
 
         <Card>
-          <UserListToolbar
+          <OrderListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -136,7 +144,7 @@ const OrderHistory = () => {
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
-                <UserListHead
+                <OrderListHead
                   order={order}
                   orderBy={orderedBy}
                   headLabel={TABLE_HEAD}
@@ -146,10 +154,11 @@ const OrderHistory = () => {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers
+                  {filteredOrders
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, symbol, buyer, realizedPnl, time, quoteQty } = row;
+                      const { id, symbol, buyer, realizedPnl, time, quoteQty, price } = row;
+                      console.log('Row: ', row);
                       const isItemSelected = selected.indexOf(symbol) !== -1;
 
                       return (
@@ -173,6 +182,7 @@ const OrderHistory = () => {
                           </TableCell>
                           <TableCell align="center">{fDateTime(time)}</TableCell>
                           <TableCell align="center">{fCurrency(realizedPnl)}</TableCell>
+                          <TableCell align="center">{price}</TableCell>
                           <TableCell align="center">{quoteQty}</TableCell>
                         </TableRow>
                       );
@@ -183,7 +193,7 @@ const OrderHistory = () => {
                     </TableRow>
                   )}
                 </TableBody>
-                {isUserNotFound && (
+                {isOrderNotFound && (
                   <TableBody>
                     <TableRow>
                       <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
