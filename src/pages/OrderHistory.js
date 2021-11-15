@@ -158,7 +158,6 @@ const OrderHistory = () => {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       const { id, symbol, buyer, realizedPnl, time, quoteQty, price } = row;
-                      console.log('Row: ', row);
                       const isItemSelected = selected.indexOf(symbol) !== -1;
 
                       return (
