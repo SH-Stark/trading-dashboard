@@ -53,7 +53,7 @@ const PositionsRepartition = () => {
 const PieChart = ({ accountPositions }) => {
   const theme = useTheme();
 
-  const positions = accountPositions?.filter((pos) => pos.positionAmt > 0);
+  const positions = accountPositions?.filter((pos) => pos.positionAmt > 0 || pos.positionAmt < 0);
 
   const chartOptions = merge(BaseOptionChart(), {
     labels: positions?.map((p) => p.symbol),
